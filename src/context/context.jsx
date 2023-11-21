@@ -1,5 +1,8 @@
 import { useState, createContext, useEffect, useReducer } from "react";
-import { nanoid } from "nanoid";
+import { nanoid } from "nanoid"; // library to generate random id
+// ========================================================
+
+//* initial data to consume
 import TodoList from "../../data.json";
 
 export const todoListContext = createContext(null);
@@ -44,13 +47,9 @@ export default function Context({ children }) {
 
   const addTodo = (title, isComplete) => {
     setAllTodos((prevTodos) => {
-      //!you shouldn't update the state directly to avoid side effects
-      //*it's a great way clone the state first then update it like so ==>
-      let newTodos = [
-        { id: nanoid(5), title: title, isComplete },
-        ...prevTodos,
-      ];
-      return newTodos;
+      let newTodo = { id: nanoid(5), title, isComplete };
+      let updatedTodos = [newTodo, ...prevTodos];
+      return updatedTodos;
     });
   };
 
